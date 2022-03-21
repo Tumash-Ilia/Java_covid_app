@@ -1,0 +1,5 @@
+logging:
+  file:
+    name: logs/backend.log
+  level:
+    com.STIproject: DEBUG

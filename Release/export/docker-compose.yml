@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  backend:
+    image: registry.gitlab.com/sti-group/sti-app/backend
+    restart: always
+    volumes:
+      - sti-appdata:/home/sti/appdata
+      - sti-logs:/home/sti/logs
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: registry.gitlab.com/sti-group/sti-app/frontend
+    restart: always
+    environment:
+      hostname: "http://localhost:8080"
+    links:
+      - backend
+    depends_on:
+      - backend
+    ports:
+      - "5000:80"
+
+volumes:
+  sti-appdata: {}
+  sti-logs: {}

@@ -1,0 +1,25 @@
+2021-07-15 22:48:16.418  INFO 14692 --- [restartedMain] com.STIproject.STI.StiApplication        : Starting StiApplication using Java 1.8.0_221 on Xiaomi-Mi-Notebook-Pro with PID 14692 (E:\STIN\sti-app\Backend\build\classes\java\main started by vladr in E:\STIN\sti-app\Backend)
+2021-07-15 22:48:16.425 DEBUG 14692 --- [restartedMain] com.STIproject.STI.StiApplication        : Running with Spring Boot v2.4.4, Spring v5.3.5
+2021-07-15 22:48:16.426  INFO 14692 --- [restartedMain] com.STIproject.STI.StiApplication        : No active profile set, falling back to default profiles: default
+2021-07-15 22:48:16.495  INFO 14692 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-07-15 22:48:16.496  INFO 14692 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-07-15 22:48:17.535  INFO 14692 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-07-15 22:48:17.543  INFO 14692 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-15 22:48:17.544  INFO 14692 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-07-15 22:48:17.637  INFO 14692 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-15 22:48:17.638  INFO 14692 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1140 ms
+2021-07-15 22:48:17.735  INFO 14692 --- [restartedMain] c.S.STI.controllers.FilesController      : Downloading data
+2021-07-15 22:48:19.590  INFO 14692 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-15 22:48:19.878  INFO 14692 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 5f5b17b6-06e8-4ae3-b568-d9d90baeab8b
+
+2021-07-15 22:48:19.954  INFO 14692 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@16b161fa, org.springframework.security.web.context.SecurityContextPersistenceFilter@24631af1, org.springframework.security.web.header.HeaderWriterFilter@1d635443, org.springframework.security.web.csrf.CsrfFilter@73cd2c9, org.springframework.security.web.authentication.logout.LogoutFilter@3d6576d3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@65d9cfeb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3f26bd2c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@650e0a7a, org.springframework.security.web.session.SessionManagementFilter@236f4729, org.springframework.security.web.access.ExceptionTranslationFilter@23030ab8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@249d0296]
+2021-07-15 22:48:19.969  INFO 14692 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-07-15 22:48:19.989  INFO 14692 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-07-15 22:48:20.022  INFO 14692 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-07-15 22:48:20.036  INFO 14692 --- [restartedMain] com.STIproject.STI.StiApplication        : Started StiApplication in 4.186 seconds (JVM running for 5.382)
+2021-07-15 22:48:40.674  INFO 14692 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-15 22:48:40.674  INFO 14692 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-15 22:48:40.676  INFO 14692 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-07-15 22:48:40.716  INFO 14692 --- [http-nio-8080-exec-1] c.S.STI.controllers.FilesController      : Downloading data

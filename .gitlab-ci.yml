@@ -1,0 +1,94 @@
+---
+image: registry.gitlab.com/sti-group/sti-app/ci
+
+stages:
+  - build
+  - dockerize
+
+variables:
+  DOCKER_BUILDKIT: 1
+  DOCKER_DRIVER: overlay2
+  GIT_CLEAN_FLAGS: none
+  TZ: Europe/Prague
+
+### TEMPLATES ###
+.build template: &build_template
+  stage: build
+  before_script:
+    - cd $BUILD_HOME
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web"
+      when: always
+    - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+      when: never
+    - changes:
+        - $BUILD_HOME/**/*
+
+.dockerize template: &dockerize_template
+  stage: dockerize
+  image: docker:18.09
+  before_script:
+    - cd $COMPONENT
+  script:
+    - export IMAGE_NAME=$(echo $COMPONENT | tr '[:upper:]' '[:lower:]')
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - export IMAGE=$CI_REGISTRY_IMAGE/$IMAGE_NAME
+    - docker build --progress=plain -f docker/Dockerfile -t $IMAGE .
+    - docker push $IMAGE
+    - docker image rm $IMAGE
+  services:
+    - docker:18.09-dind
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web"
+      when: always
+    - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+      when: never
+    - changes:
+        - $COMPONENT/**/*
+
+### JOBS ###
+#build
+build backend:
+  <<: *build_template
+  image: registry.gitlab.com/sti-group/sti-app/openjdk:8-jdk
+  variables:
+    BUILD_HOME: Backend
+  script:
+    - export GRADLE_USER_HOME=$(pwd)/$BUILD_HOME/.gradle
+    - rm -rf build/libs/*
+    - chmod +x gradlew
+    - ./gradlew clean
+    - ./gradlew build -i --build-cache --no-daemon
+    - rm -rf build/libs/backend.jar
+    - mv build/libs/*.jar build/libs/backend.jar
+  artifacts:
+    paths:
+      - $BUILD_HOME/build/libs/backend.jar
+    expire_in: 7 days
+
+build frontend:
+  <<: *build_template
+  image: registry.gitlab.com/sti-group/sti-app/node:fermium
+  variables:
+    BUILD_HOME: Frontend
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - $BUILD_HOME/node_modules
+    expire_in: 2 days
+
+#dockerization
+dockerize backend:
+  <<: *dockerize_template
+  variables:
+    COMPONENT: Backend
+  needs:
+    - build backend
+
+dockerize frontend:
+  <<: *dockerize_template
+  variables:
+    COMPONENT: Frontend
+  needs:
+   - build frontend
